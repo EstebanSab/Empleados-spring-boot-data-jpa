@@ -1,5 +1,10 @@
 package com.empleados.empleadosApi.repository;
 
-public class EmpleadoRepository {
-    
+import com.empleados.empleadosApi.model.Empleado;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+
+//jpql 
+public interface EmpleadoRepository extends JpaRepository<Empleado, Long>{
+   
 }
