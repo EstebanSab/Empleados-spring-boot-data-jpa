@@ -66,16 +66,23 @@ public class Empleado {
     private String email;
 
     @Column(
-            name = "age",
+            name = "edad",
             nullable = false
     )
-    private Integer age;
+    private Integer edad;
 
 
-	public Empleado(String nombre,String apellido,String trabajo) {
+	public Empleado(
+        String nombre,
+        String apellido,
+        String trabajo,
+        String email,
+        Integer edad) {
 		this.nombre = nombre;
         this.apellido = apellido;
         this.trabajo = trabajo;
+        this.edad=edad;
+        this.email=email;
 	}
 
 	public Empleado() {}
@@ -98,6 +105,19 @@ public class Empleado {
 		return this.trabajo;
 	}
 
+    public Integer getEdad(){
+        return this.edad;
+    }
+
+    public String getEmail() {
+		return this.email;
+	}
+
+
+    public void setId(Long id){
+		this.id = id;
+	}
+    
     public void setNombre(String nuevoNombre) {
         this.nombre=nuevoNombre;
 	}
@@ -110,8 +130,14 @@ public class Empleado {
 		this.trabajo=nuevoTrabajo;
 	}
 
-	public void setId(Long id){
-		this.id = id;
+    public void setEdad(Integer edad){
+		this.edad=edad;
 	}
+
+    public void setEmail(String email){
+		this.email=email;
+	}
+
+	
 
 }
