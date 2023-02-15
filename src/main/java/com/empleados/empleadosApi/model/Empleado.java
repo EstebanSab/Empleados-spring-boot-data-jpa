@@ -72,6 +72,14 @@ public class Empleado {
     private Integer edad;
 
 
+         
+    @OneToOne(
+            mappedBy = "empleado",
+            orphanRemoval = true
+    )
+    private Legajo legajoEmpleado;
+
+
 	public Empleado(
         String nombre,
         String apellido,

@@ -47,5 +47,10 @@ public class EmpleadoService {
         this.empleadoRepository.modificaNombreEmpleadoById(nombre,id);
     }
 
+    //prueba modificar empleado con "save"
+    public void modificarEmpleadoConSave(Empleado empleado) {
+        this.empleadoRepository.save(empleado);
+    }
+
 
 }

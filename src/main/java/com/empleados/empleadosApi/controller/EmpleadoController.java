@@ -1,7 +1,7 @@
 package com.empleados.empleadosApi.controller;
 
 import com.empleados.empleadosApi.model.Empleado;
-import com.empleados.empleadosApi.service.EmpleadoService;
+import com.empleados.empleadosApi.service.*;
 
 import org.springframework.web.bind.annotation.*;
 
@@ -14,11 +14,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 @RequestMapping("api/empleados")
 public class EmpleadoController {
 
-    private EmpleadoService empleadoService;    
+    private EmpleadoService empleadoService;  
+    private LegajoService legajoService;  
 
     @Autowired
-    public EmpleadoController(EmpleadoService empleadoService){
+    public EmpleadoController(EmpleadoService empleadoService,LegajoService legajoService){
         this.empleadoService=empleadoService;
+        this.legajoService=legajoService;
     }
                   
 
@@ -41,6 +43,7 @@ public class EmpleadoController {
     @PostMapping
     public void agregarNuevoEmpleado(@RequestBody Empleado empleado) {
       this.empleadoService.crearEmpleado(empleado);
+      this.legajoService.crearLegajo(empleado);
     }
 
     
@@ -51,8 +54,17 @@ public class EmpleadoController {
         this.empleadoService.modificarEmpleado(id,empleado);
     }
 
+    //Prueba de modificacion de datos con "save"
+    @PutMapping(path = "/empleado/save")
+    public void modificarUsuarioConSave(@RequestBody Empleado empleado) {
+        this.empleadoService.modificarEmpleadoConSave(empleado);
+    }
+
+
+
     @DeleteMapping(path = "/delete/{id}")
     public void eliminarEmpleado(@PathVariable("id") Long id){
+        this.legajoService.eliminarLegajo(id);
         this.empleadoService.eliminarEmpleado(id);
     }       
 
