@@ -9,21 +9,21 @@ import org.springframework.stereotype.Service;
 import com.empleados.empleadosApi.model.Empleado;
 import com.empleados.empleadosApi.model.Sucursal;
 import com.empleados.empleadosApi.repository.EmpleadoRepository;
-import com.empleados.empleadosApi.repository.SucursalRepository;
+
 
 @Service
 public class EmpleadoService {
-    EmpleadoRepository empleadoRepository;
-    SucursalService sucursalService;
-    private SucursalRepository sucursalRepository;
+    private EmpleadoRepository empleadoRepository;
+    private SucursalService sucursalService;
+
+    
     @Autowired
     public EmpleadoService(
         EmpleadoRepository empleadoRepository,
-        SucursalService sucursalService,
-        SucursalRepository sucursalRepository){
+        SucursalService sucursalService
+        ){
         this.empleadoRepository=empleadoRepository;
         this.sucursalService =sucursalService;
-        this.sucursalRepository = sucursalRepository;
     }
 
     public List<Empleado> getAllEmpleados() {
@@ -44,9 +44,10 @@ public class EmpleadoService {
     public void crearEmpleado(Empleado empleadoParametro,Long idSucursal) {
         Sucursal miSucursalById;
         Empleado empleadoNuevoCreado;
-
+        
         //Obtengo la sucursal por la id en el parametro
-        miSucursalById =  this.sucursalRepository.findById(idSucursal).get();
+        //miSucursalById =  this.sucursalRepository.findById(idSucursal).get();
+        miSucursalById = this.sucursalService.obteneSucursalById(idSucursal);
         
         //Seteo la sucursal obtenida en el nuevo Empleado
         empleadoParametro.setSucursal(miSucursalById);
@@ -58,7 +59,8 @@ public class EmpleadoService {
         miSucursalById.addEmpleado(empleadoNuevoCreado);
 
         //guardo cambios de la sucursal
-        this.sucursalRepository.save(miSucursalById);
+        //this.sucursalRepository.save(miSucursalById);
+        this.sucursalService.guardarCambiosSucursal(miSucursalById);
     }
 
     public void eliminarEmpleado(Long id) {

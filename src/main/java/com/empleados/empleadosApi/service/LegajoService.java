@@ -23,14 +23,9 @@ public class LegajoService {
     }
 
     public void crearLegajo(Long idEmpleado,Legajo legajo){
-        Legajo legajoEmpleado = new Legajo(
-            empleadoService.getEmpleadoById(idEmpleado),
-            legajo.getSueldo(),
-            legajo.getCategoria(),
-            legajo.getAmonestacion(),
-            legajo.getEmail(),
-            legajo.getNacimiento());
-        this.legajoRepository.save(legajoEmpleado);
+        //En caso de que no funcione crear legajo(empleado)
+        legajo.setEmpleado(empleadoService.getEmpleadoById(idEmpleado));
+        this.legajoRepository.save(legajo);
     }
 
     public void eliminarLegajo(Long id){

@@ -2,6 +2,7 @@ package com.empleados.empleadosApi.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.empleados.empleadosApi.model.Empleado;
@@ -11,8 +12,9 @@ import com.empleados.empleadosApi.repository.SucursalRepository;
 @Service
 public class SucursalService {
 
-    SucursalRepository sucursalRepository;
-
+    private SucursalRepository sucursalRepository;
+    
+    @Autowired
     public SucursalService(SucursalRepository sucursalRepository){
         this.sucursalRepository=sucursalRepository;
     }
@@ -22,12 +24,21 @@ public class SucursalService {
     }
 
     public void guardarEmpleado(Empleado empleado,Long idSucursal){
+        
         Sucursal miSucursal =  this.sucursalRepository.findById(idSucursal).get();  
         miSucursal.addEmpleado(empleado);
         this.sucursalRepository.save(miSucursal);
-    }
+    } 
 
     public List<Empleado> empleadosSucursal(Long idSucursal){
         return this.sucursalRepository.findById(idSucursal).get().getEmpleados();
+    }
+
+    public Sucursal obteneSucursalById(Long id){
+        return  this.sucursalRepository.findById(id).get();
+    }
+
+    public void guardarCambiosSucursal(Sucursal sucursal) {
+        this.sucursalRepository.save(sucursal);
     }
 }

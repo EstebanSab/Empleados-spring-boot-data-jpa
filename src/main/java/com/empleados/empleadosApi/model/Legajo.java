@@ -172,6 +172,9 @@ public class Legajo {
         return this.nacimiento;
     }
 
+    public void setEmpleado(Empleado empleado) {
+        this.empleado = empleado;
+    }
 
 
 }
