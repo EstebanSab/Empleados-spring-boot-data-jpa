@@ -4,7 +4,11 @@ package com.empleados.empleadosApi.model;
 import java.util.List;
 import java.util.ArrayList;
 
+
 import javax.persistence.*;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 
 
@@ -56,14 +60,23 @@ public class Sucursal {
     //un empleado esta relacionado con una y solo una sucursal
     //obtener todos los empleados
     //id de sucursal en empleado
+    //AQUI ES ONE TO MANY
     @OneToMany(
         mappedBy = "sucursal",
         orphanRemoval = true,
         cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
         fetch = FetchType.LAZY
         )
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Empleado> empleados = new ArrayList<Empleado>();
 
+
+    //podria crear una tercera tabla que se llame transacciones y 
+    ///realizar many to one
+    //clietes realizan transacciones en una o muchas sucursales
+    //mappedBy = nombre del campo con el que relacionamos esta entidad
+    @ManyToMany(mappedBy = "sucursales")
+    private List<Cliente> clientes = new ArrayList<Cliente>();
 
     public void addEmpleado(Empleado empleado) {
         if (!this.empleados.contains(empleado)) {
@@ -79,6 +92,12 @@ public class Sucursal {
         }
     }
 
+
+    public void addCliente(Cliente cliente) {
+        if (!this.clientes.contains(cliente)) {
+            this.clientes.add(cliente);
+        }
+    }
 
     public List<Empleado> getEmpleados() {
         return this.empleados;

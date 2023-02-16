@@ -47,7 +47,7 @@ public class EmpleadoService {
         
         //Obtengo la sucursal por la id en el parametro
         //miSucursalById =  this.sucursalRepository.findById(idSucursal).get();
-        miSucursalById = this.sucursalService.obteneSucursalById(idSucursal);
+        miSucursalById = this.sucursalService.getSucursalById(idSucursal);
         
         //Seteo la sucursal obtenida en el nuevo Empleado
         empleadoParametro.setSucursal(miSucursalById);

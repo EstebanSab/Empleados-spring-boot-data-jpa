@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.empleados.empleadosApi.model.Empleado;
 import com.empleados.empleadosApi.model.Sucursal;
 import com.empleados.empleadosApi.repository.SucursalRepository;
 
@@ -23,22 +22,27 @@ public class SucursalService {
         this.sucursalRepository.save(sucursal);
     }
 
-    public void guardarEmpleado(Empleado empleado,Long idSucursal){
-        
-        Sucursal miSucursal =  this.sucursalRepository.findById(idSucursal).get();  
-        miSucursal.addEmpleado(empleado);
-        this.sucursalRepository.save(miSucursal);
-    } 
-
-    public List<Empleado> empleadosSucursal(Long idSucursal){
-        return this.sucursalRepository.findById(idSucursal).get().getEmpleados();
+    public List<Sucursal> getAllSucursales(){
+        return this.sucursalRepository.findAll();
     }
 
-    public Sucursal obteneSucursalById(Long id){
+    public Sucursal getSucursalById(Long id){
         return  this.sucursalRepository.findById(id).get();
     }
 
     public void guardarCambiosSucursal(Sucursal sucursal) {
         this.sucursalRepository.save(sucursal);
     }
+
+    public void eliminarSucursal(Long id){
+        this.sucursalRepository.deleteById(id);
+    }
+
+    //public void guardarEmpleado(Empleado empleado,Long idSucursal){
+    //    
+    //    Sucursal miSucursal =  this.sucursalRepository.findById(idSucursal).get();  
+    //    miSucursal.addEmpleado(empleado);
+    //    this.sucursalRepository.save(miSucursal);
+    //} 
+
 }

@@ -31,7 +31,7 @@ public class LegajoController {
         return this.legajoService.getAllLegajos();
     }
 
-   @PostMapping(path = "/legajo/empleado/{id}")
+   @PostMapping(path = "/empleado/{id}")
    public void agregarLegajo(
     @RequestBody Legajo legajo,
     @PathVariable("id") Long id){

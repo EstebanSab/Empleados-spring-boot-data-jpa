@@ -13,10 +13,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class EmpleadoController {
 
     private EmpleadoService empleadoService;  
-    private LegajoService legajoService;  
+    private LegajoService legajoService;
 
     @Autowired
-    public EmpleadoController(EmpleadoService empleadoService,LegajoService legajoService){
+    public EmpleadoController(
+        EmpleadoService empleadoService,
+        LegajoService legajoService
+        ){
         this.empleadoService=empleadoService;
         this.legajoService=legajoService;
     }
@@ -38,9 +41,11 @@ public class EmpleadoController {
     }
 
 
-    @PostMapping("/sucursal/{id}")
-    public void agregarNuevoEmpleado(@RequestBody Empleado empleado,@PathVariable Long id) {
-      this.empleadoService.crearEmpleado(empleado,id);
+    @PostMapping("/{idSucursal}")
+    public void agregarNuevoEmpleado(
+        @RequestBody Empleado empleado,
+        @PathVariable("idSucursal") Long idSucursal) {
+      this.empleadoService.crearEmpleado(empleado,idSucursal);
     }
 
     
@@ -63,6 +68,7 @@ public class EmpleadoController {
     public void eliminarEmpleado(@PathVariable("id") Long id){
         this.legajoService.eliminarLegajo(id);
         this.empleadoService.eliminarEmpleado(id);
-    }       
+    }      
+    
 
 }

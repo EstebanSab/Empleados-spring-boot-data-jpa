@@ -2,6 +2,7 @@ package com.empleados.empleadosApi.model;
 import javax.persistence.*;
 
 
+
 //Entity nombre del la clase
 //Con @Table se mapea la clase por la tabla si el nombre no es igual
 @Entity(name="Empleado")
