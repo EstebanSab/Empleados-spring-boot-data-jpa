@@ -64,8 +64,37 @@ public class Empleado {
     )
     private Legajo legajoEmpleado;
 
+    //Sucursal tiene muchos empleados
+    //Empleado solo trabaja en una y solo una sucursal
+    //Empleado va a tener la columna adicional que se va conectar 
+    //con la pk de sucursal
+    @ManyToOne
+    @JoinColumn(
+            name = "sucursal_id",
+            nullable = true,
+            referencedColumnName = "id",
+            foreignKey = @ForeignKey(
+                    name = "sucursal_empleado_fk"
+            )
+    )
+    private Sucursal sucursal;
+
 
 	public Empleado(
+        String nombre,
+        String apellido,
+        String trabajo,
+        Sucursal sucursal
+        ) {
+		this.nombre = nombre;
+        this.apellido = apellido;
+        this.trabajo = trabajo;
+        this.sucursal = sucursal;
+	}
+
+	public Empleado() {}
+
+    public Empleado(
         String nombre,
         String apellido,
         String trabajo
@@ -74,9 +103,6 @@ public class Empleado {
         this.apellido = apellido;
         this.trabajo = trabajo;
 	}
-
-	public Empleado() {}
-
 
 
 	public Long getId() {
@@ -96,7 +122,9 @@ public class Empleado {
 	}
 
 
-   
+    public void setSucursal(Sucursal sucursal) {
+        this.sucursal = sucursal;
+    }
 
     public void setId(Long id){
 		this.id = id;

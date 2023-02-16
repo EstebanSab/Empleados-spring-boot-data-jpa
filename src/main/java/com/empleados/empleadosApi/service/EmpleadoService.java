@@ -7,15 +7,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.empleados.empleadosApi.model.Empleado;
+import com.empleados.empleadosApi.model.Sucursal;
 import com.empleados.empleadosApi.repository.EmpleadoRepository;
+import com.empleados.empleadosApi.repository.SucursalRepository;
 
 @Service
 public class EmpleadoService {
     EmpleadoRepository empleadoRepository;
-
+    SucursalService sucursalService;
+    private SucursalRepository sucursalRepository;
     @Autowired
-    public EmpleadoService(EmpleadoRepository empleadoRepository){
+    public EmpleadoService(
+        EmpleadoRepository empleadoRepository,
+        SucursalService sucursalService,
+        SucursalRepository sucursalRepository){
         this.empleadoRepository=empleadoRepository;
+        this.sucursalService =sucursalService;
+        this.sucursalRepository = sucursalRepository;
     }
 
     public List<Empleado> getAllEmpleados() {
@@ -33,8 +41,24 @@ public class EmpleadoService {
         return this.empleadoRepository.selectEmpleadosWhereNombre(nombre);
     }
 
-    public void crearEmpleado(Empleado nuevoEmpleado) {
-        this.empleadoRepository.save(nuevoEmpleado);
+    public void crearEmpleado(Empleado empleadoParametro,Long idSucursal) {
+        Sucursal miSucursalById;
+        Empleado empleadoNuevoCreado;
+
+        //Obtengo la sucursal por la id en el parametro
+        miSucursalById =  this.sucursalRepository.findById(idSucursal).get();
+        
+        //Seteo la sucursal obtenida en el nuevo Empleado
+        empleadoParametro.setSucursal(miSucursalById);
+        
+        //Guardo el empleado en la base de datos y lo guardo en una variable
+        empleadoNuevoCreado = this.empleadoRepository.save(empleadoParametro);
+        
+        //Agrego el empleado a la sucursal obtenida por id
+        miSucursalById.addEmpleado(empleadoNuevoCreado);
+
+        //guardo cambios de la sucursal
+        this.sucursalRepository.save(miSucursalById);
     }
 
     public void eliminarEmpleado(Long id) {

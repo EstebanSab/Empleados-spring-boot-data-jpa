@@ -3,10 +3,8 @@ package com.empleados.empleadosApi.controller;
 import com.empleados.empleadosApi.model.Empleado;
 import com.empleados.empleadosApi.service.*;
 
-import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-
+import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
@@ -40,9 +38,9 @@ public class EmpleadoController {
     }
 
 
-    @PostMapping
-    public void agregarNuevoEmpleado(@RequestBody Empleado empleado) {
-      this.empleadoService.crearEmpleado(empleado);
+    @PostMapping("/sucursal/{id}")
+    public void agregarNuevoEmpleado(@RequestBody Empleado empleado,@PathVariable Long id) {
+      this.empleadoService.crearEmpleado(empleado,id);
     }
 
     

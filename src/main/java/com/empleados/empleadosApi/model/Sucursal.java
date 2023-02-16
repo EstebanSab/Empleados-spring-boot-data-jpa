@@ -1,4 +1,9 @@
 package com.empleados.empleadosApi.model;
+
+
+import java.util.List;
+import java.util.ArrayList;
+
 import javax.persistence.*;
 
 
@@ -45,6 +50,39 @@ public class Sucursal {
     )
     private String nombre;
 
+
+
+    //una sucursal esta relacionada con muchos empleados
+    //un empleado esta relacionado con una y solo una sucursal
+    //obtener todos los empleados
+    //id de sucursal en empleado
+    @OneToMany(
+        mappedBy = "sucursal",
+        orphanRemoval = true,
+        cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
+        fetch = FetchType.LAZY
+        )
+    private List<Empleado> empleados = new ArrayList<Empleado>();
+
+
+    public void addEmpleado(Empleado empleado) {
+        if (!this.empleados.contains(empleado)) {
+            this.empleados.add(empleado);
+            //empleado.setSucursal(this);
+        }
+    }
+
+    public void removeEmpleado(Empleado empleado) {
+        if (this.empleados.contains(empleado)) {
+            this.empleados.remove(empleado);
+            empleado.setSucursal(null);
+        }
+    }
+
+
+    public List<Empleado> getEmpleados() {
+        return this.empleados;
+    }
 
     public Sucursal(){}
 
