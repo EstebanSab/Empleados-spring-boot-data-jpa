@@ -41,8 +41,6 @@ public class Empleado {
     )
 	private Long id;
 
-
-
 	@Column(name="nombre",
             nullable = false,
             columnDefinition = "TEXT")
@@ -58,21 +56,8 @@ public class Empleado {
             columnDefinition = "TEXT")
 	private  String trabajo;
 
-    @Column(
-            name = "email",
-            nullable = false,
-            columnDefinition = "TEXT"
-    )
-    private String email;
-
-    @Column(
-            name = "edad",
-            nullable = false
-    )
-    private Integer edad;
-
-
-         
+  
+    
     @OneToOne(
             mappedBy = "empleado",
             orphanRemoval = true
@@ -83,14 +68,11 @@ public class Empleado {
 	public Empleado(
         String nombre,
         String apellido,
-        String trabajo,
-        String email,
-        Integer edad) {
+        String trabajo
+        ) {
 		this.nombre = nombre;
         this.apellido = apellido;
         this.trabajo = trabajo;
-        this.edad=edad;
-        this.email=email;
 	}
 
 	public Empleado() {}
@@ -113,14 +95,8 @@ public class Empleado {
 		return this.trabajo;
 	}
 
-    public Integer getEdad(){
-        return this.edad;
-    }
 
-    public String getEmail() {
-		return this.email;
-	}
-
+   
 
     public void setId(Long id){
 		this.id = id;
@@ -137,15 +113,5 @@ public class Empleado {
 	public void setTrabajo(String nuevoTrabajo){
 		this.trabajo=nuevoTrabajo;
 	}
-
-    public void setEdad(Integer edad){
-		this.edad=edad;
-	}
-
-    public void setEmail(String email){
-		this.email=email;
-	}
-
-	
 
 }

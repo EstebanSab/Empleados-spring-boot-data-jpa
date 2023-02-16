@@ -27,7 +27,9 @@ public class LegajoService {
             empleadoService.getEmpleadoById(idEmpleado),
             legajo.getSueldo(),
             legajo.getCategoria(),
-            legajo.getAmonestacion());
+            legajo.getAmonestacion(),
+            legajo.getEmail(),
+            legajo.getNacimiento());
         this.legajoRepository.save(legajoEmpleado);
     }
 

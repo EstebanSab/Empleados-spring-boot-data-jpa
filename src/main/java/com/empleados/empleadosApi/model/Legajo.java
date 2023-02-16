@@ -62,6 +62,22 @@ public class Legajo {
     )
     private String amonestacion;
 
+    @Column(
+            name = "email",
+            nullable = false,
+            columnDefinition = "TEXT"
+    )
+    private String email;
+
+
+    @Column(
+        name = "edad",
+        nullable = false
+    )
+    private Integer nacimiento;
+
+
+
     //one to one define la relacion 
     //joincolumn se coloca en la columna que tendra la fk de la otra tabla
     @OneToOne(cascade = CascadeType.ALL)
@@ -74,17 +90,34 @@ public class Legajo {
         )
     private Empleado empleado;
 
-    public Legajo(Empleado empleado,int sueldo,String categoria,String amonestacion){
+    public Legajo(
+        Empleado empleado,
+        int sueldo,
+        String categoria,
+        String amonestacion,
+        String email,
+        Integer nacimiento
+        ){
         this.sueldo =sueldo;
         this.categoria=categoria;
         this.amonestacion=amonestacion;
+        this.nacimiento=nacimiento;
+        this.email=email;
         this.empleado=empleado;
     }
 
-    public Legajo(int sueldo,String categoria,String amonestacion){
+    public Legajo(
+        int sueldo,
+        String categoria,
+        String amonestacion,
+        String email,
+        Integer nacimiento
+        ){
         this.sueldo =sueldo;
         this.categoria=categoria;
         this.amonestacion=amonestacion;
+        this.nacimiento=nacimiento;
+        this.email=email;
     }
 
     public Legajo(){}
@@ -94,7 +127,7 @@ public class Legajo {
         return this.id;
     }
 
-    public void setId(Long Id){
+    public void setId(Long id){
         this.id = id;
     }
 
@@ -121,6 +154,24 @@ public class Legajo {
     public void setAmonestacion(String amonestacion){
          this.amonestacion = amonestacion;
     }
+
+    public String getEmail() {
+		return this.email;
+	}
+    public void setEmail(String email){
+		this.email=email;
+    }
+    
+    
+    public void setNacimiento(Integer nacimiento){
+		this.nacimiento=nacimiento;
+	}
+
+    
+    public Integer getNacimiento(){
+        return this.nacimiento;
+    }
+
 
 
 }
