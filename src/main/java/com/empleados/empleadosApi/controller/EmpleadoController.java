@@ -43,7 +43,6 @@ public class EmpleadoController {
     @PostMapping
     public void agregarNuevoEmpleado(@RequestBody Empleado empleado) {
       this.empleadoService.crearEmpleado(empleado);
-      this.legajoService.crearLegajo(empleado);
     }
 
     

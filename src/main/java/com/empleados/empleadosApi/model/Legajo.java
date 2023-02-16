@@ -81,6 +81,12 @@ public class Legajo {
         this.empleado=empleado;
     }
 
+    public Legajo(int sueldo,String categoria,String amonestacion){
+        this.sueldo =sueldo;
+        this.categoria=categoria;
+        this.amonestacion=amonestacion;
+    }
+
     public Legajo(){}
 
 
